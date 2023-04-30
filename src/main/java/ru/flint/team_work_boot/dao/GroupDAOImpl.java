@@ -28,7 +28,6 @@ public class GroupDAOImpl implements GroupDAO{
 
         return entityManager.find(Group.class,name);
     }
-
     @Override
     @Transactional
     public void saveGroup(Group group) {

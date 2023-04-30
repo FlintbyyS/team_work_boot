@@ -3,7 +3,6 @@ package ru.flint.team_work_boot.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -22,7 +21,6 @@ public class Group {
     private int students_number;
 
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
-    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
             name="LECTURER_GROUPS",
             inverseJoinColumns=@JoinColumn(name="LECTURER_ID", referencedColumnName="ID"),
