@@ -56,13 +56,13 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
                 .requestMatchers(HttpMethod.GET, "/api/employees/**").hasAnyRole(Role.STUDENT.name(),Role.LECTURER.name())
-                .requestMatchers(HttpMethod.GET,"/api/students/**").hasRole(Role.STUDENT.name())
+                .requestMatchers(HttpMethod.GET,"/api/students/**").hasAnyRole(Role.STUDENT.name(),Role.ADMIN.name())
                 .requestMatchers("/api/students/**").hasRole(Role.LECTURER.name())
                 .requestMatchers("/api/**").hasRole(Role.ADMIN.name())
                 .and().httpBasic()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().csrf().disable();
-//                .headers().frameOptions().disable(); // this setting is for H2 console only
+
         return http.build();
     }
 }
