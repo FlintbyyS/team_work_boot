@@ -3,7 +3,6 @@ package ru.flint.team_work_boot.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -32,7 +31,6 @@ public class Subject {
     private List<Employee> employees;
 
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
-    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
             name="GROUP_SUBJECT",
             joinColumns=@JoinColumn(name="SUBJECT_ID", referencedColumnName="ID"),
