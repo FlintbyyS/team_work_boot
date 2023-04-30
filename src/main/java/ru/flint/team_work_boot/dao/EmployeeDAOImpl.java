@@ -22,11 +22,13 @@ public class EmployeeDAOImpl implements EmployeeDAO{
     }
 
     @Override
-    public void saveEmployee(Employee employee) {
+    public Employee saveEmployee(Employee employee) {
 
-
-        entityManager.merge(employee);
-
+        if (employee.isNew()){
+            entityManager.persist(employee);
+            return employee;
+        }
+        return getEmployee(employee.getId()) == null ? null : entityManager.merge(employee);
     }
 
     @Override

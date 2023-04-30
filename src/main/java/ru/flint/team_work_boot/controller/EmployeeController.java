@@ -1,7 +1,9 @@
 package ru.flint.team_work_boot.controller;
 
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import ru.flint.team_work_boot.entity.Employee;
 import ru.flint.team_work_boot.exception_handling.NoSuchEmployeeException;
@@ -35,20 +37,25 @@ public class EmployeeController {
     }
 
     @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
     public Employee addNewEmployee(@RequestBody Employee employee){
-        employeeService.saveEmployee(employee);
-        return employee;
+         return employeeService.saveEmployee(employee);
     }
 
     @PutMapping()
+    @Transactional
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public Employee updateEmployee(@RequestBody Employee employee){
 
-        employeeService.saveEmployee(employee);
+        if (employeeService.getEmployee(employee.getId()) == null){
+            throw new NoSuchEmployeeException("There is no employee in Database");
+        }
 
-        return employee;
+          return employeeService.saveEmployee(employee);
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public String deleteEmployee(@PathVariable int id){
 
         Employee employee = employeeService.getEmployee(id);

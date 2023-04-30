@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 
+
 @Entity
 @Table(name = "employees")
 @Getter
@@ -37,4 +38,9 @@ public class Employee {
     @Column(name = "email")
     private String email;
 
+
+
+    public boolean isNew(){
+        return this.id == 0;
+    }
 }
