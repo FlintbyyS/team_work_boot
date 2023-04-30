@@ -8,7 +8,7 @@ DELETE FROM lecturer_groups;
 DELETE FROM lecturer_subject;
 DELETE FROM departments;
 DELETE FROM users;
-DELETE FROM authorities;
+DELETE FROM user_role;
 
 ALTER SEQUENCE global_seq RESTART WITH 100000;
 
@@ -18,7 +18,7 @@ VALUES
     (2,'mam59@tpu.ru', '{noop}mam', true),
     (3,'ivan@tpu.ru', '{noop}ivan', true);
 
-INSERT INTO authorities (user_id, authority)
+INSERT INTO user_role (user_id, role)
 VALUES
     (2, 'STUDENT'),
     (1, 'LECTURER'),
@@ -27,9 +27,9 @@ VALUES
 
 INSERT INTO employees (name, surname, school, department, post, workload, salary, email)
 VALUES
-    ('Sergey','Tsapko',	'ISHITR','OIT','Docent',150,36500,	'sgt@tpu.ru'),
-    ('Mikhail','Mujikbaev',	'ISHITR','OIT','Laboratory assistant',120,19700,'mam59@tpu.ru'),
-    ('Vladimir','Popov','ISHITR','OIT','Lecturer',130,28100,'vnp@tpu.ru');
+    ('Сергей','Цапко',	'ИШИТР','ОИТ','Доцент',150,36500,'sgt@tpu.ru'),
+    ('Михаил','Мужикбаев',	'ИШИТР','ОИТ','Ассистент',120,19700,'mam59@tpu.ru'),
+    ('Владимир','Попов','ИШИТР','ОИТ','Преподаватель',130,28100,'vnp@tpu.ru');
 INSERT INTO student_group(name,students)
 VALUEs
     ('8K03',22),

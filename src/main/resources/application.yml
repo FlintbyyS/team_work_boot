@@ -2,7 +2,7 @@ spring:
   # Database
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: "jdbc:postgresql://localhost:5432/postgres" # https://stackoverflow.com/a/52481318/20265936
+    url: "jdbc:postgresql://localhost:5432/team" # https://stackoverflow.com/a/52481318/20265936
     username: teamwork
     password: teamwork
 
@@ -38,7 +38,7 @@ spring:
 logging:
   level:
     root: WARN
-    ru.flint.ru.flint.team_work_boot: DEBUG
+    ru.flint.team_work_boot: DEBUG
     org.springframework.orm.jpa: DEBUG
     org.springframework.security: DEBUG
 

@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS students;
 DROP TABLE IF EXISTS student_group;
 DROP TABLE IF EXISTS subjects;
 DROP TABLE IF EXISTS departments;
-DROP TABLE IF EXISTS authorities;
+DROP TABLE IF EXISTS user_role;
 DROP TABLE IF EXISTS users;
 
 DROP SEQUENCE IF EXISTS global_seq;
@@ -22,9 +22,9 @@ CREATE TABLE users
     enabled     BOOLEAN                           NOT NULL
 ) ;
 
-CREATE TABLE authorities (
+CREATE TABLE user_role (
                              user_id BIGINT,
-                             authority varchar(25),
+                             role varchar(25),
                              FOREIGN KEY (user_id) references users(id)
 ) ;
 
