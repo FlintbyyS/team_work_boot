@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.springframework.data.util.ProxyUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import ru.flint.team_work_boot.config.security.PasswordDeserializer;
@@ -14,6 +15,7 @@ import ru.flint.team_work_boot.config.security.PasswordDeserializer;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.EnumSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -23,7 +25,13 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(callSuper = true, exclude = {"password"})
-public class User extends AbstractEntity implements Serializable{
+public class User implements Serializable{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    protected Long id;
+
     @Column(name = "email", nullable = false)
     @Email(message = "Enter valid e-mail")
     @Size(max = 128)
@@ -37,14 +45,13 @@ public class User extends AbstractEntity implements Serializable{
     @JsonDeserialize(using = PasswordDeserializer.class)
     private String password;
 
-
+    @Column(name = "enabled")
     private boolean enabled = true;
 
 
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "authorities", joinColumns = @JoinColumn(name = "user_id"),
-            uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "authority"}, name = "uk_user_role")})
-    @Column(name = "authority")
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
     @NotEmpty(message = "Roles must not be empty")
     private Set<Role> roles;
@@ -57,5 +64,15 @@ public class User extends AbstractEntity implements Serializable{
     }
     public void setRoles(Collection<Role> roles) {
         this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
+    }
+    public boolean isNew() {
+        return id == null;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || !getClass().equals(ProxyUtils.getUserClass(o))) return false;
+        User that = (User) o;
+        return id != null && Objects.equals(id, that.id);
     }
 }
