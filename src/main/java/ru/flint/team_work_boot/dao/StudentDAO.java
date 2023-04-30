@@ -20,7 +20,9 @@ public interface StudentDAO {
      void deleteStudent(long id);
 
      List<Integer> getOmissionsForSubject(String subject,String group);
+     Integer getOmissionForSubjectByStudentId(String subject,int id);
 
      List<Integer> getScoresForSubject(String subject,String group);
+     Integer getScoreForSubjectByStudentId(String subject,int id);
 
 }

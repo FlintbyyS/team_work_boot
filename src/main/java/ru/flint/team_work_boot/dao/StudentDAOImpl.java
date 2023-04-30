@@ -2,6 +2,7 @@ package ru.flint.team_work_boot.dao;
 
 
 import jakarta.persistence.EntityManager;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +12,7 @@ import ru.flint.team_work_boot.entity.Student;
 import java.util.List;
 
 @Repository
+@Slf4j
 public class StudentDAOImpl implements StudentDAO{
 
 
@@ -97,6 +99,15 @@ public class StudentDAOImpl implements StudentDAO{
     }
 
     @Override
+    public Integer getOmissionForSubjectByStudentId(String subject,int id) {
+        return entityManager.createQuery("select omissions from Grade where subject like: subject and student_id =: id"
+                        ,Integer.class)
+                .setParameter("subject",subject)
+                .setParameter("id",id)
+                .getSingleResult();
+    }
+
+    @Override
     @Transactional
     public List<Integer> getScoresForSubject(String subject, String group) {
 
@@ -104,5 +115,15 @@ public class StudentDAOImpl implements StudentDAO{
                 .setParameter("subject","%" +subject + "%")
                 .setParameter("group","%" +group + "%")
                 .getResultList();
+    }
+
+    @Override
+    public Integer getScoreForSubjectByStudentId(String subject,int id) {
+
+        return entityManager.createQuery("select scores from Grade where subject like: subject and student_id =: id"
+                        ,Integer.class)
+                .setParameter("subject",subject)
+                .setParameter("id",id)
+                .getSingleResult();
     }
 }
