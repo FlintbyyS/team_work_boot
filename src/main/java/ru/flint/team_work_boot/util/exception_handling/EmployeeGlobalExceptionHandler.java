@@ -1,4 +1,4 @@
-package ru.flint.team_work_boot.exception_handling;
+package ru.flint.team_work_boot.util.exception_handling;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

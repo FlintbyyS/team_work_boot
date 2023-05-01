@@ -1,4 +1,4 @@
-package ru.flint.team_work_boot.exception_handling;
+package ru.flint.team_work_boot.util.exception_handling;
 
 public class NoSuchStudentException extends  RuntimeException{
 
