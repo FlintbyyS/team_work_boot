@@ -9,7 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.flint.team_work_boot.entity.Performance;
 import ru.flint.team_work_boot.entity.Student;
-import ru.flint.team_work_boot.exception_handling.NoSuchStudentException;
+import ru.flint.team_work_boot.util.exception_handling.NoSuchStudentException;
 import ru.flint.team_work_boot.service.StudentService;
 
 import java.util.Collection;
@@ -34,6 +34,15 @@ public class StudentController {
     @GetMapping("/{id}")
     public Student get(@PathVariable int id) {
         return studentService.getStudentById(id);
+    }
+
+    @GetMapping("/user/{user_id}")
+    public Student getStudentByUserId(@PathVariable int user_id){
+        Student student = studentService.getStudentByUserId(user_id);
+        if(student == null){
+            throw new NoSuchStudentException("There is no student with user_id = " + user_id + " in Database");
+        }
+        return student;
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

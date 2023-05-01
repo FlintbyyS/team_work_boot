@@ -40,6 +40,12 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
+    public Employee getEmployeeByUserId(int user_id) {
+        log.info("Get employee with user_id: {}",user_id);
+        return employeeDAO.getEmployeeByUserId(user_id);
+    }
+
+    @Override
     @Transactional
     public void deleteEmployee(int id) {
         log.info("Delete employee with id: {}",id);

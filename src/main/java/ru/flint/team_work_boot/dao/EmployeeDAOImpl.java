@@ -38,6 +38,13 @@ public class EmployeeDAOImpl implements EmployeeDAO{
     }
 
     @Override
+    public Employee getEmployeeByUserId(int user_id) {
+        return entityManager.createQuery("from Employee where user_id =: user_id",Employee.class)
+                .setParameter("user_id",user_id)
+                .getSingleResult();
+    }
+
+    @Override
     public void deleteEmployee(int id) {
         entityManager.createQuery("delete from Employee where id =:employeeId")
                 .setParameter("employeeId",id)

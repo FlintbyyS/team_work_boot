@@ -69,6 +69,12 @@ public class StudentServiceImpl implements StudentService{
         return studentDAO.getStudentById(id);
     }
 
+    @Override
+    public Student getStudentByUserId(int user_id) {
+        log.info("Get student by user_id: {}",user_id);
+        return studentDAO.getStudentByUserId(user_id);
+    }
+
 
     @Override
     @Transactional

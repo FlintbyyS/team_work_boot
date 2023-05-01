@@ -6,7 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import ru.flint.team_work_boot.entity.Employee;
-import ru.flint.team_work_boot.exception_handling.NoSuchEmployeeException;
+import ru.flint.team_work_boot.util.exception_handling.NoSuchEmployeeException;
 import ru.flint.team_work_boot.service.EmployeeService;
 
 import java.util.List;
@@ -32,6 +32,14 @@ public class EmployeeController {
         Employee employee = employeeService.getEmployee(id);
         if(employee == null){
             throw new NoSuchEmployeeException("There is no employee with ID = " + id + " in Database");
+        }
+        return employee;
+    }
+    @GetMapping("/user/{user_id}")
+    public  Employee getEmployeeByUserId(@PathVariable int user_id){
+        Employee employee = employeeService.getEmployeeByUserId(user_id);
+        if(employee == null){
+            throw new NoSuchEmployeeException("There is no employee with user_id = " + user_id + " in Database");
         }
         return employee;
     }

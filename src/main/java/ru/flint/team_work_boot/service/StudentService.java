@@ -13,6 +13,7 @@ public interface StudentService {
      List<Student> saveStudent(List<Student> students,String group,String subject);
      Student saveStudent(Student student,String group);
      Student getStudentById(long id);
+     Student getStudentByUserId(int user_id);
      void deleteStudent(int id);
      List<Student> getAllStudentsByGroupAndSubject(String group,String subject);
      List<Student> updateStudents(List<Student> students,String group, String subject);

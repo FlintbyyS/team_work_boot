@@ -16,6 +16,7 @@ public interface StudentDAO {
      void saveStudent(Student student);
 
      Student getStudentById(long id);
+     Student getStudentByUserId(int user_id);
 
      void deleteStudent(long id);
 
