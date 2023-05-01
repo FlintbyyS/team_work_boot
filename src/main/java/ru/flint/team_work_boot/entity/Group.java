@@ -1,10 +1,13 @@
 package ru.flint.team_work_boot.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import ru.flint.team_work_boot.util.annotation.NoHtml;
 
 import java.util.List;
 
@@ -15,9 +18,12 @@ import java.util.List;
 public class Group {
     @Id
     @Column(name = "name")
+    @NoHtml
+    @NotBlank(message = "Name must not be empty")
     private String name;
 
     @Column(name = "students")
+    @Positive(message = "Students_number must be positive")
     private int students_number;
 
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})

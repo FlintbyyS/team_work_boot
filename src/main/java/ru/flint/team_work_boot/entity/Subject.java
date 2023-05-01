@@ -1,10 +1,12 @@
 package ru.flint.team_work_boot.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import ru.flint.team_work_boot.util.annotation.NoHtml;
 
 import java.util.List;
 
@@ -20,6 +22,8 @@ public class Subject {
     private long id;
 
     @Column(name = "name")
+    @NoHtml
+    @NotBlank(message = "Name must not be empty")
     private String name;
 
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})

@@ -38,7 +38,9 @@ CREATE TABLE employees
     post        VARCHAR                           NOT NULL,
     workload    INTEGER                           NOT NULL,
     salary      INTEGER                           NOT NULL,
-    email       VARCHAR                           NOT NULL
+    email       VARCHAR                           NOT NULL,
+    user_id     INTEGER                           ,
+    FOREIGN KEY (user_id) references users(id)
 ) ;
 CREATE TABLE student_group (
                                name VARCHAR                           NOT NULL,
@@ -56,7 +58,9 @@ CREATE TABLE students (
                           group_name VARCHAR                           NOT NULL,
                           omissions INTEGER                           NOT NULL,
                           scores INTEGER                           NOT NULL,
-                          FOREIGN KEY (group_name)  REFERENCES student_group (name)
+                          user_id     INTEGER                       ,
+                          FOREIGN KEY (group_name)  REFERENCES student_group (name),
+                          FOREIGN KEY (user_id) references users(id)
 ) ;
 CREATE TABLE subjects (
                                 id INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),

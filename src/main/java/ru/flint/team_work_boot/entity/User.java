@@ -11,6 +11,7 @@ import org.springframework.data.util.ProxyUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import ru.flint.team_work_boot.config.security.PasswordDeserializer;
+import ru.flint.team_work_boot.util.annotation.NoHtml;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -35,6 +36,7 @@ public class User implements Serializable{
     @Column(name = "email", nullable = false)
     @Email(message = "Enter valid e-mail")
     @Size(max = 128)
+    @NoHtml
     private String email;
 
     @Column(name = "password", nullable = false)
