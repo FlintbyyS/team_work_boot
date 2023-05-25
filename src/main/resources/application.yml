@@ -2,9 +2,9 @@ spring:
   # Database
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: "jdbc:postgresql://localhost:5432/teamwork" # https://stackoverflow.com/a/52481318/20265936
-    username: user
-    password: secret
+    url: "jdbc:postgresql://localhost:5432/team" # https://stackoverflow.com/a/52481318/20265936
+    username: teamwork
+    password: teamwork
 
 
   # JPA properties
